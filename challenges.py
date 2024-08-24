@@ -20,7 +20,20 @@ def count_mentions(some_colour_word: str):
     """
     # hint - the .lower() method will convert a Python string to lowercase.
     # https://www.w3schools.com/python/ref_string_lower.asp
-    pass
+    
+    count = 0
+    with open('colours_20_simple.csv', mode='r') as file:
+        reader = csv.DictReader(file)
+        
+        for row in reader:
+            english_name = row['English']
+            
+            if some_colour_word.lower() in english_name.lower():
+                count += 1
+    
+    return count 
+result = count_mentions("beige")
+
 
 
 def generate_coloured_text(colour_name: str):
