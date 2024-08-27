@@ -1,6 +1,6 @@
 import csv
 
-def count_mentions(some_colour_word: str):
+def count_mentions(some_colour_word: str): 
     """The "colours_20_simple.csv" is a .csv file with a header. It lists facts 
     about 20 different colours, including their RGB values, hexadecimal 
     representation, and english name. 
@@ -22,18 +22,21 @@ def count_mentions(some_colour_word: str):
     # https://www.w3schools.com/python/ref_string_lower.asp
     
     count = 0
-    with open('colours_20_simple.csv', mode='r') as file:
-        reader = csv.DictReader(file)
+    with open('colours_20_simple.csv') as file:
+        reader = csv.reader(file)
         
         for row in reader:
-            english_name = row['English']
+            english_name = row[2]
+            
             
             if some_colour_word.lower() in english_name.lower():
                 count += 1
+                # count = count + 1
+                
     
     return count 
 result = count_mentions("beige")
-
+print(result)
 
 
 def generate_coloured_text(colour_name: str):
@@ -55,7 +58,21 @@ def generate_coloured_text(colour_name: str):
     Example: supplying the argument "Alizarin Crimson" would result in a return 
     value of '<p style="color:#e32636;">Alizarin Crimson</p>'
     """
-    pass
+        
+    with open('colours_865.csv') as file:
+        reader = csv.reader(file)
+
+        for row in reader:
+            hex_value = row[1] 
+            # print(hex_value)
+            english_name = row[2]
+            # print(english_name)
+
+            if colour_name == english_name:
+                final_result = f'<p style="color:{hex_value};">{english_name}</p>'
+        # print(final_result)
+    return final_result 
+        
 
 def galactic_speed_percentile(galactic_speed: float):
     """The "galaxies.csv" file is a .csv file WITHOUT a header. It describes
@@ -81,5 +98,9 @@ def galactic_speed_percentile(galactic_speed: float):
         - an input of 999999.0 would result in a return value of 0.0, because
         0% of the listed galaxies are travelling faster than 999999km/sec 
     """
-    
-    pass
+    # Convert to km
+
+    with open('galaxies.csv') as file:
+        reader = csv.reader(file)
+        
+
